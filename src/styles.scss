@@ -1,4 +1,3 @@
-
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
@@ -8,6 +7,7 @@
 
 html {
   height: 100%;
+  margin: 0;
   @include mat.theme((
     color: (
       primary: mat.$azure-palette,
@@ -36,3 +36,90 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --container-width: 1200px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button, select {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  max-width: var(--container-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+// Overrides default Angular Material styles for compact header search
+.header__search {
+  .mat-mdc-form-field-infix {
+    padding: 6px 8px;
+    min-height: 40px;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  .mat-mdc-form-field-suffix {
+    margin-top: 0;
+  }
+
+  .mat-mdc-form-field-wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top: 50%;
+  }
+
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+    transform: translateY(-30px) scale(0.75);
+  }
+}
