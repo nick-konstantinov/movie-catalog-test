@@ -1,0 +1,37 @@
+<button
+  mat-icon-button
+  class="dialog__close"
+  mat-dialog-close
+>
+  <mat-icon>close</mat-icon>
+</button>
+
+<mat-dialog-content class="dialog">
+  <img
+    class="dialog__poster"
+    [src]="poster"
+    [alt]="movie.title"
+  />
+
+  <div class="dialog__info">
+    <h2 mat-dialog-title class="dialog__title">
+      {{ movie.title }} ({{ year }})
+    </h2>
+
+    @if (movie.genres?.length) {
+      <mat-chip-set>
+        @for (g of movie.genres; track g) {
+          <mat-chip>{{ g }}</mat-chip>
+        }
+      </mat-chip-set>
+    }
+
+    <p class="dialog__overview">
+      {{ movie.overview || 'Описание отсутствует' }}
+    </p>
+
+    <div class="dialog__rating">
+      ⭐ {{ movie.vote_average | number:'1.1-1' }}
+    </div>
+  </div>
+</mat-dialog-content>
