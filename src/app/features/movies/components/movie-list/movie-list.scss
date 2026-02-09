@@ -1,0 +1,64 @@
+.movies-wrapper {
+  text-align: center;
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #1976d2;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 20px;
+    padding-top: 20px;
+  }
+
+  .load-more {
+    margin: 24px 0;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__icon {
+    position: relative;
+    top: -3px;
+  }
+
+  &:hover {
+    background-color: #1565c0;
+  }
+}
+
