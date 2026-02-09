@@ -1,14 +1,21 @@
 <mat-toolbar class="header">
   <div class="container">
     <div class="header__inner">
-      <a class="header__logo" href="#" >КФ</a>
+      <a class="header__logo">КФ</a>
+
       <h1 class="header__title">{{ title }}</h1>
 
       <mat-form-field appearance="outline" class="header__search">
         <mat-label>Поиск</mat-label>
-        <input matInput placeholder="Название фильма" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange($event)">
 
-        @if (searchQuery) {
+        <input
+          #searchInput
+          matInput
+          placeholder="Название фильма"
+          [formControl]="searchControl"
+        />
+
+        @if (searchControl.value) {
           <button mat-icon-button matSuffix (click)="clearSearch()">
             <mat-icon>close</mat-icon>
           </button>

@@ -1,52 +1,80 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+  OnInit,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { debounceTime, Subject } from 'rxjs';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    MatToolbarModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule],
+  ],
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Header {
+export class Header implements OnInit {
+  @ViewChild('searchInput')
+  searchInput!: ElementRef<HTMLInputElement>;
+
   @Input() title: string = 'Каталог фильмов';
 
-  searchQuery: string = '';
-  private searchSubject = new Subject<string>();
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  constructor() {
-    this.searchSubject
+  searchControl = new FormControl('');
+
+  ngOnInit() {
+    this.searchControl.valueChanges
       .pipe(
         debounceTime(300),
+        distinctUntilChanged(),
         untilDestroyed(this)
       )
       .subscribe(query => {
-        console.log('Поиск:', query);
+        this.router.navigate([], {
+          queryParams: { search: query || null },
+          queryParamsHandling: 'merge',
+        });
+      });
+
+    this.route.queryParamMap
+      .pipe(untilDestroyed(this))
+      .subscribe(params => {
+        const search = params.get('search') ?? '';
+
+        if (search !== this.searchControl.value) {
+          this.searchControl.setValue(search, { emitEvent: false });
+
+          if (search && this.searchInput) {
+            this.searchInput.nativeElement.focus();
+          }
+        }
       });
   }
 
-  onSearchChange(value: string) {
-    this.searchSubject.next(value);
-  }
-
   clearSearch() {
-    this.searchQuery = '';
-    this.searchSubject.next(this.searchQuery);
+    this.searchControl.setValue('');
   }
 }
