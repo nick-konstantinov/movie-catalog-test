@@ -1,0 +1,40 @@
+.not-found {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 16px;
+
+  &__content {
+    max-width: 520px;
+  }
+
+  &__code {
+    font-size: 120px;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+
+    background: linear-gradient(135deg, #1976d2, #42a5f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    opacity: 0.9;
+  }
+
+  &__title {
+    margin-top: 16px;
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin-top: 8px;
+    color: #666;
+  }
+
+  &__btn {
+    margin-top: 24px;
+  }
+}
