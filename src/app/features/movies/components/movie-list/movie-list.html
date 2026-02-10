@@ -5,6 +5,13 @@
     </div>
   }
 
+  @if (!loading && (movies$ | async)?.length === 0) {
+    <div class="empty">
+      <h2>Ничего не найдено</h2>
+      <p>Попробуйте изменить поисковый запрос</p>
+    </div>
+  }
+
   @if ((movies$ | async)?.length) {
     <div class="movies-grid">
       @for (movie of movies$ | async; track movie.id) {
