@@ -1,59 +1,117 @@
-# MovieCatalogTest
+# Movie Catalog
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+A movie catalog application built with **Angular** that allows users to browse popular movies, search for titles, and view detailed movie information in a modern UI.
 
-## Development server
+The project uses **TMDB API** as the data source.
 
-To start a local development server, run:
+---
+
+## Preview
+
+![Movie Catalog Preview](docs/preview.webp)
+
+### Live Demo
+https://nick-konstantinov.github.io/movie-catalog-test/
+
+## Getting Started
+
+Follow these steps to run the project locally.
+
+### Clone the repository
+
+```bash
+git clone https://github.com/nick-konstantinov/movie-catalog-test.git
+cd movie-catalog
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Environment Setup
+
+For security reasons, the TMDB API key is not stored in the repository.
+
+Navigate to:
+
+```cpp
+src/environments/
+```
+
+Rename the template file:
+
+```cpp
+environment.template.ts → environment.ts
+```
+
+Open environment.ts and insert your TMDB API key:
+
+```cpp
+export const environment = {
+  production: false,
+  tmdbApiKey: 'YOUR_TMDB_API_KEY',
+  tmdbApiUrl: 'https://api.themoviedb.org/3',
+  tmdbImageUrl: 'https://image.tmdb.org/t/p/w500',
+  tmdbLanguage: 'ru-RU'
+};
+```
+
+### How to Get a TMDB API Key
+1. Create an account at https://www.themoviedb.org/
+2. Go to Account Settings → API
+3. Generate an API key
+4. Paste it into environment.ts
+
+### Run the Development Server
 
 ```bash
 ng serve
 ```
+Open your browser:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```cpp
+http://localhost:4200/
 ```
+The app will automatically reload when you modify source files.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Production Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+The build artifacts will be stored in:
+```cpp
+dist/
 ```
 
-## Running end-to-end tests
+### Features
 
-For end-to-end (e2e) testing, run:
+- Browse popular movies
+- Movie search with URL state
+- Detailed movie popup (poster, genres, description, rating)
+- Load more pagination
+- Scroll-to-top button
+- Responsive layout (mobile-friendly)
+- Smooth UI interactions
+- 404 page
+- Footer with TMDB attribution
 
-```bash
-ng e2e
-```
+### Tech Stack
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Angular
+- TypeScript
+- Angular Material
+- RxJS
+- TMDB API
 
-## Additional Resources
+### Data Source
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+All movie data is provided by:
+https://www.themoviedb.org/
+
+### Author
+
+Developed by Nick Konstantinov
